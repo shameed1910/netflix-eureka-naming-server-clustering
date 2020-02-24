@@ -1,0 +1,37 @@
+spring:
+  profiles : peer1
+application:
+  name:  netflix-eureka-naming-server
+server:
+  port: 8760
+eureka:
+   client:
+      registerWithEureka: false
+      fetchRegistry: false
+      instance:
+          hostname: ind-east-zone
+      serviceUrl:
+        defaultZone: http://ind-west-zone:8761/eureka/
+   server:
+      renewalPercentThreshold: 0.8
+      enableSelfRreservation: true
+      
+---
+
+spring:
+  profiles: peer2
+  application:
+    name: netflix-eureka-naming-server
+server:
+  port: 8761
+eureka:
+  client:
+      registerWithEureka: false
+      fetchRegistry: false
+      instance:
+          hostname: ind-west-zone
+      serviceUrl:
+        defaultZone: http://ind-east-zone:8760/eureka/
+  server:
+      renewalPercentThreshold: 0.8
+      enableSelfRreservation: true  
